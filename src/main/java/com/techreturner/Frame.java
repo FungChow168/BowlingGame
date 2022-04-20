@@ -4,47 +4,47 @@ public class Frame {
     private boolean isStrike = false;
     private boolean isSpare = false;
     private final int totalPin = 10;
-    private boolean isFirstRow = true;
-    private int firstRow = 0;
-    private int secondRow = 0;
-    private int firstBonusRow = 0;
-    private int secondBonusrow =0;
-    private boolean isFirstBonusRow = true;
+    private boolean isFirstRoll = true;
+    private int firstRoll = 0;
+    private int secondRoll = 0;
+    private int firstBonusRoll = 0;
+    private int secondBonusroll =0;
+    private boolean isFirstBonusRoll = true;
     private int totalScore = 0;
     private int bonusAdded = 0;
     private boolean isClose = false;
 
-    public boolean addRow(String score){
+    public boolean addRoll(String score){
         switch (score){
             case "X" -> {
                 isStrike = true;
-                firstRow = totalPin;
+                firstRoll = totalPin;
                 totalScore = totalPin;
                 isClose = true;
             }
             case "-" -> {
-                if (isFirstRow) {
-                    firstRow = 0;
+                if (isFirstRoll) {
+                    firstRoll = 0;
                     totalScore = 0;
-                    isFirstRow = false;
+                    isFirstRoll = false;
                 }else{
-                    secondRow = 0;
+                    secondRoll = 0;
                     isClose = true;
                 }
             }
             case "/" ->{
                 isSpare = true;
-                secondRow = totalPin - firstRow;
+                secondRoll = totalPin - firstRoll;
                 totalScore = totalPin;
                 isClose = true;
             }
             default -> {
-                if (isFirstRow) {
-                    firstRow = Integer.valueOf(score);
+                if (isFirstRoll) {
+                    firstRoll = Integer.valueOf(score);
                     totalScore = Integer.valueOf(score);
-                    isFirstRow = false;
+                    isFirstRoll = false;
                 }else{
-                    secondRow = Integer.valueOf(score);
+                    secondRoll = Integer.valueOf(score);
                     totalScore += Integer.valueOf(score);
                     isClose = true;
                 }
@@ -56,19 +56,20 @@ public class Frame {
     public boolean isStrike(){ return isStrike;};
     public boolean isSpare(){ return isSpare;};
     public boolean isClose(){return isClose;};
-    public int getFirstRow(){return firstRow;};
-    public int getSecondRow(){return secondRow;};
+    public int getFirstRoll(){return firstRoll;};
+    public int getSecondRoll(){return secondRoll;};
     public int getTotalScore(){return totalScore;};
-    public int getFirstBonusRow(){return firstBonusRow;};
-    public int getSecondBonusrow(){return secondBonusrow;};
+    public int getFirstBonusRoll(){return firstBonusRoll;};
+    public int getSecondBonusroll(){return secondBonusroll;};
+    public void setTotalScore(int totalScore){this.totalScore = totalScore;};
 
     public void addBonus(String bonus){
         int score = convertToInt(bonus);
-        if (isFirstBonusRow){
-            firstBonusRow = score;
-            isFirstBonusRow = false;
+        if (isFirstBonusRoll){
+            firstBonusRoll = score;
+            isFirstBonusRoll = false;
         }else
-            secondBonusrow = score;
+            secondBonusroll = score;
         bonusAdded += score;
     }
 
